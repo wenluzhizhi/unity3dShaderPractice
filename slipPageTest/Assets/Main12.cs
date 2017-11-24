@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Generic;
 
+
+//[ExecuteInEditMode]
 public class Main12 : MonoBehaviour
 {
 
@@ -34,9 +36,8 @@ public class Main12 : MonoBehaviour
 			"使用点阵生成mesh,然后根据拖拽点进行改变点的布局，简单demo示例，进一步优化，日后改善")) 
 		{
 			setPanle ();
+			Debug.Log ("生成mesh....");
 		}
-
-
 	}
 
 
@@ -46,27 +47,32 @@ public class Main12 : MonoBehaviour
 	public bool isSlip=false;
 	public float maxL=4;
 	public int type=-1;
+	public bool isShrink=false;
 	void Update(){
 
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0))
+		{
+
+			isShrink = false;
 			screenPos = Input.mousePosition;
-			WorldPos = Camera.main.ScreenToWorldPoint (new Vector3(screenPos.x,screenPos.y,Mathf.Abs(Camera.main.transform.position.z-startPos.z)));
+			startPos = this.transform.position;
+			WorldPos = Camera.main.ScreenToWorldPoint (new Vector3(screenPos.x,screenPos.y,Mathf.Abs(Camera.main.transform.position.z-fourCorner[0].z)));
 			isSlip = false;
 			if (WorldPos.x > fourCorner [0].x && WorldPos.x < fourCorner [3].x && WorldPos.y > fourCorner [0].y && WorldPos.y < fourCorner [1].y) {
 				isSlip = true;
 
 				type = -1;
-				if (Vector3.Distance (WorldPos, fourCorner [0]) < maxL) {
+				if (Vector2.Distance (WorldPos, fourCorner [0]) < maxL) {
 					minDisDot = fourCorner [0];
 					type = 0;
-				} else if (Vector3.Distance (WorldPos, fourCorner [1]) < maxL) {
+				} else if (Vector2.Distance (WorldPos, fourCorner [1]) < maxL) {
 					minDisDot = fourCorner [1];
 					type = 1;
-				} else if (Vector3.Distance (WorldPos, fourCorner [2]) < maxL) {
+				} else if (Vector2.Distance (WorldPos, fourCorner [2]) < maxL) {
 					minDisDot = fourCorner [2];
 					type = 2;
-				} else if (Vector3.Distance (WorldPos, fourCorner [3]) < maxL) {
+				} else if (Vector2.Distance (WorldPos, fourCorner [3]) < maxL) {
 					minDisDot = fourCorner [3];
 					type = 3;
 				}
@@ -76,54 +82,82 @@ public class Main12 : MonoBehaviour
 		}
 		else if (Input.GetMouseButton (0)) 
 		{
-			
+			isShrink=false;
 			screenPos = Input.mousePosition;
 			WorldPos = Camera.main.ScreenToWorldPoint (new Vector3(screenPos.x,screenPos.y,Mathf.Abs(Camera.main.transform.position.z-startPos.z)));
 
 			///minDisDot=fourCorner[1];
+			MoveDrag();
 
-			if (isSlip&&type>=0)
-			{
-				Vector3 dragLine = WorldPos - minDisDot;
-
-				Vector3 dragLineMiddle = (WorldPos + minDisDot) / 2;
-				float dragLineVerticalLineSlope = -dragLine.x / dragLine.y;
-
-				float verticalLine_B = dragLineMiddle.y - dragLineVerticalLineSlope * dragLineMiddle.x;
-
-				float maxDis = Vector3.Magnitude (dragLine)/2;
-
-				Vector3 v;
-				float k = dragLineVerticalLineSlope;
-				float _b = verticalLine_B;
-
-				for (int i = 0; i < vertices.Length; i++)
-				{
-					v = vertices_Raw [i];
-					if ((v.y > dragLineVerticalLineSlope * v.x + verticalLine_B&&(type==1||type==2))||
-						(v.y < dragLineVerticalLineSlope * v.x + verticalLine_B&&(type==0||type==3))
-					) 
-					{
-						float m = (k * v.x - v.y + _b) / (k * k + 1);
-						//点到直线的距离
-						float d_verticalLine=Mathf.Abs((k*v.x-v.y+_b)/Mathf.Sqrt(k*k+1));
-						//float d2 = 1-Mathf.Abs (((d_verticalLine - (maxDis/2.0f)) / (maxDis/2.0f)));
-
-						vertices [i] = new Vector3 (v.x - 2 * k * m, v.y + 2 * m,d_verticalLine*0.05f);
-					} 
-					else 
-					{
-						vertices [i] = v;
-					}
-				}
-
-
-
-				RestPanel ();
-			}
 		}
-		else if (Input.GetMouseButtonUp(0)) {
-			setPanle ();
+		else if (Input.GetMouseButtonUp(0)) 
+		{
+			
+			isShrink=true;
+
+		}
+		if(isShrink){
+
+			float _dis=Vector3.Distance(WorldPos,minDisDot);
+			if(_dis>0.1f&&_dis<0.5f){
+				isSlip=false;
+				setPanle();
+			}
+			else
+			{
+				WorldPos = Vector3.Lerp (WorldPos,minDisDot,0.1f);
+				MoveDrag();
+			}
+
+		}
+	}
+
+
+	private void MoveDrag(){
+
+		if (isSlip&&type>=0)
+		{
+			Vector3 dragLine = WorldPos - minDisDot;
+
+			Vector3 dragLineMiddle = (WorldPos + minDisDot) / 2;
+			float dragLineVerticalLineSlope = -dragLine.x / dragLine.y;
+
+			float verticalLine_B = dragLineMiddle.y - dragLineVerticalLineSlope * dragLineMiddle.x;
+
+			float maxDis = Vector3.Magnitude (dragLine)/2;
+
+
+		
+
+
+			Vector3 v;
+			float k = dragLineVerticalLineSlope;
+			float _b = verticalLine_B;
+
+
+
+			for (int i = 0; i < vertices.Length; i++)
+			{
+				v = vertices_Raw [i];
+				if ((v.y > dragLineVerticalLineSlope * v.x + verticalLine_B&&(type==1||type==2))||
+					(v.y < dragLineVerticalLineSlope * v.x + verticalLine_B&&(type==0||type==3))
+				) 
+				{
+					
+					float m = (k * v.x - v.y + _b) / (k * k + 1);
+
+					//点到直线的距离
+					float d_verticalLine=Mathf.Abs((k*v.x-v.y+_b)/Mathf.Sqrt(k*k+1));
+					float d2 =Mathf.Sin((d_verticalLine / maxDis) * Mathf.PI/2);
+					vertices [i] = new Vector3 (v.x - 2 * k * m, v.y + 2 * m,v.z+d2*0.01f);
+
+				} 
+				else 
+				{
+					vertices [i] = v;
+				}
+			}
+			RestPanel ();
 		}
 	}
 
@@ -136,14 +170,18 @@ public class Main12 : MonoBehaviour
 		vertices_Raw=new Vector3[X*Y];
 		triangles=new int[X*Y*3-6];
 		int _num = 0;
+		Vector3 _pos;
 		List<int> triList = new List<int> ();
 		for (int i = 0; i < Y; i++) 
 		{
 			for (int j = 0; j < X; j++)
 			{
 				_num = i * X + j;
-				vertices [_num] = startPos + new Vector3 (j,i,0)*scale;
-				vertices_Raw [_num] = startPos + new Vector3 (j,i,0)*scale;
+
+				//_pos = startPos + new Vector3 (j,i,0)*scale;
+			    _pos =new Vector3 (j,i,0)*scale;
+				vertices [_num] = _pos;
+				vertices_Raw [_num] =_pos;
 				uvs [_num] = new Vector2 ((float)j/X,(float)i/Y);
 				if (i < Y - 1 && j < X - 1) {
 					triList.Add (_num);
@@ -182,10 +220,10 @@ public class Main12 : MonoBehaviour
 		msr.material = myMa;
 		msf.mesh = myMesh;
 
-		fourCorner[0]=vertices[0];
-		fourCorner[1]=vertices[(Y-1)*X];
-		fourCorner [2] = vertices [X * Y - 1];
-		fourCorner[3]=vertices[X-1];
+		fourCorner[0]=vertices[0]+startPos;
+		fourCorner[1]=vertices[(Y-1)*X]+startPos;
+		fourCorner [2] = vertices [X * Y - 1]+startPos;
+		fourCorner[3]=vertices[X-1]+startPos;
         
 
 	}

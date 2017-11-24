@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{39237B33-8CB2-9F86-191A-2DB891608BFC}") = "slipPageTest", "Assembly-CSharp.csproj", "{ACDBE9D3-F69F-C781-8260-CA83D1B21E76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACDBE9D3-F69F-C781-8260-CA83D1B21E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDBE9D3-F69F-C781-8260-CA83D1B21E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDBE9D3-F69F-C781-8260-CA83D1B21E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDBE9D3-F69F-C781-8260-CA83D1B21E76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
