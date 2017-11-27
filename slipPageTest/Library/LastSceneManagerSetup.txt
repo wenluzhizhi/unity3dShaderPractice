@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/SlipPage.unity
+- path: Assets/testFlipPage.unity
   isLoaded: 1
   isActive: 1

@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Main12.cs" />
+     <Compile Include="Assets\TestRendrImage.cs" />
      <None Include="Assets\MyShader1.shader" />
+     <None Include="Assets\RippleWarterShader1.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity3d5.3/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
