@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestRendrImage : MonoBehaviour {
+public class Shader027_RippleWater_C_1 : MonoBehaviour {
 
 	public Material ma;
 	public Texture2D normalTex;

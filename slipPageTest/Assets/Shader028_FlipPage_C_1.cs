@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 
 //[ExecuteInEditMode]
-public class Main12 : MonoBehaviour
+public class Shader028_FlipPage_C_1 : MonoBehaviour
 {
 
 

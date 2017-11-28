@@ -45,10 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Main12.cs" />
-     <Compile Include="Assets\TestRendrImage.cs" />
-     <None Include="Assets\MyShader1.shader" />
-     <None Include="Assets\RippleWarterShader1.shader" />
+     <Compile Include="Assets\Shader027_RippleWater_C_1.cs" />
+     <Compile Include="Assets\Shader028_FlipPage_C_1.cs" />
+     <None Include="Assets\Shader028_FlipPage_S_1.shader" />
+     <None Include="Assets\Shader027_RippleWater_S_1.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity3d5.3/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

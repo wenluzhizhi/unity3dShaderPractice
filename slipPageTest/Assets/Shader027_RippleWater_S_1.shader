@@ -1,4 +1,4 @@
-﻿Shader "Custom/RippleWarterShader1" {
+﻿Shader "Custom/Shader027_RippleWater_S_1" {
 
 
 

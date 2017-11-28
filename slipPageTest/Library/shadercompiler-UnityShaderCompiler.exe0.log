@@ -1,14 +1,10 @@
 Base path: D:/Unity3d5.3/Unity/Editor/Data
 Cmd: getPlatforms
 Cmd: preprocess
+  insize=1601 outsize=341 ok=1
+Cmd: preprocess
+  insize=1607 outsize=347 ok=1
+Cmd: preprocess
   insize=2021 outsize=462 ok=1
 Cmd: preprocess
-  insize=1601 outsize=341 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=1559 outsize=609 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=1559 outsize=589 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=1559 outsize=859 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=1559 outsize=0 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+  insize=2034 outsize=475 ok=1

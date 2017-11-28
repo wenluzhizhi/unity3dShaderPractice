@@ -1,4 +1,4 @@
-﻿Shader "Custom/MyShader1" {
+﻿Shader "Custom/Shader028_FlipPage_S_1" {
 	properties{
 	  _MainColor("MainColor",Color)=(1,1,1,1)
 	  _MainTex("Main Tex",2D)="white"{}
